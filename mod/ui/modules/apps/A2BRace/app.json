@@ -1,0 +1,22 @@
+{
+  "domElement": "<a2b-race></a2b-race>",
+  "name": "A2B Race",
+  "types": [
+    "ui.apps.categories.vehicle_info"
+  ],
+  "description": "Point-to-point races with your party on BeamMP servers running A2B Race (or solo in single-player). Set point A and B, invite players, start: first to B wins, everyone else blows up.",
+  "css": {
+    "left": "20px",
+    "top": "180px",
+    "width": "220px",
+    "height": "40px",
+    "min-width": "180px",
+    "min-height": "36px"
+  },
+  "author": "D3K1D",
+  "version": "0.1.0",
+  "directive": "a2bRace",
+  "category": "General",
+  "isAuxiliary": false,
+  "interactive": "yes"
+}

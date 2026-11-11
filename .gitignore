@@ -1,0 +1,4 @@
+dist/
+.stage/
+*.zip
+*.log
