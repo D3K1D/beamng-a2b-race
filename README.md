@@ -30,6 +30,10 @@ Then restart the server. Players download the client mod automatically when they
 4. **Invite** players from the list. They get a message and an Accept button in their A2B Race window.
 5. Click **START RACE**.
 
+The host can remove a point (and its marker) with the ✕ next to it. Anyone can hide the A/B markers for themselves with **Show the A / B markers**.
+
+When someone wins, every player on the server sees the celebration: a light pillar and searchlight beams hundreds of metres into the sky, fireworks bursting overhead, and confetti.
+
 You stay in your party after the race, so the host can set up the next one right away. Leave with **Leave party**, or accept someone else's invite. If the host leaves, the next player becomes host. The host can also stop a race in progress.
 
 If you're walking when the race starts, you're put into the last car you drove.

@@ -254,8 +254,10 @@ function M.new(env)
     r.losers, r.nextBoom = losers, 1
     local order = { { pid = pid, name = name(pid) } }
     for _, id in ipairs(losers) do order[#order + 1] = { pid = id, name = name(id) } end
-    for _, id in ipairs(p.order) do
-      env.send(id, 'result', { winner = pid, name = name(pid), key = r.keys[pid], order = order })
+    -- Everyone on the server gets it, so everyone sees the winner's celebration.
+    for id in pairs(env.names()) do
+      env.send(id, 'result', { winner = pid, name = name(pid), key = r.keys[pid], party = p.id, b = p.b,
+        order = order })
     end
   end
 

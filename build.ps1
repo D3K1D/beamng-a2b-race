@@ -1,7 +1,7 @@
 # Builds the A2B Race release files into a2b-race/dist/:
 #   a2brace_d3k1d.zip          the client mod (also works on its own in single-player: solo races)
 #   A2BRace-Server-<ver>.zip   BeamMP server pack: Resources/Client + Resources/Server/A2BRace
-param([string]$Version = "0.1.0")
+param([string]$Version = "0.1.1")
 $ErrorActionPreference = 'Stop'
 $root = $PSScriptRoot
 $dist = Join-Path $root 'dist'

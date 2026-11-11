@@ -34,10 +34,12 @@
         <div class="a2b-sec">Points</div>
         <div class="a2b-row"><span class="a2b-pt a">A</span><span class="a2b-lbl">{{s.view.party.a ? 'Start set' : 'Not set'}}</span>
           <button class="a2b-btn" ng-click="setPoint('A', 'car')" title="Where you are now, facing your way">My spot</button>
-          <button class="a2b-btn" ng-click="setPoint('A', 'map')" title="The spot you clicked on the big map (M)">Map pin</button></div>
+          <button class="a2b-btn" ng-click="setPoint('A', 'map')" title="The spot you clicked on the big map (M)">Map pin</button>
+          <button class="a2b-btn x" ng-click="setPoint('A', 'clear')" ng-disabled="!s.view.party.a" title="Remove point A and its marker">&#10005;</button></div>
         <div class="a2b-row"><span class="a2b-pt b">B</span><span class="a2b-lbl">{{s.view.party.b ? 'Finish set' : 'Not set'}}</span>
           <button class="a2b-btn" ng-click="setPoint('B', 'car')" title="Where you are now">My spot</button>
-          <button class="a2b-btn" ng-click="setPoint('B', 'map')" title="The spot you clicked on the big map (M)">Map pin</button></div>
+          <button class="a2b-btn" ng-click="setPoint('B', 'map')" title="The spot you clicked on the big map (M)">Map pin</button>
+          <button class="a2b-btn x" ng-click="setPoint('B', 'clear')" ng-disabled="!s.view.party.b" title="Remove point B and its marker">&#10005;</button></div>
         <div class="a2b-hint">Map pin: open the big map (M), click a spot so a route appears, come back here and press <i>Map pin</i>. {{s.mapPin ? 'A map pin is set now.' : ''}}
           A picked from the map faces towards B; <i>My spot</i> faces the way you're facing.</div>
 
@@ -56,7 +58,8 @@
         <div class="a2b-hint">Start: everyone in the party is teleported and repaired at A, held for a 10 second countdown, then GO. First to B wins; everyone else blows up. Reset, repair or teleport during the race = back to A.</div>
       </div>
 
-      <div class="a2b-row" style="margin-top:12px"><button class="a2b-btn" ng-click="call('leave')">Leave party</button></div>
+      <label class="a2b-row" style="margin-top:12px"><input type="checkbox" ng-model="ui.markers" ng-change="call('setShowMarkers', ui.markers)"> Show the A / B markers in the world (just for you)</label>
+      <div class="a2b-row"><button class="a2b-btn" ng-click="call('leave')">Leave party</button></div>
     </div>
     <div class="a2b-warn" ng-if="!s.hasCar">Get in a car: walking players race in the last car they drove.</div>
   </div>
@@ -86,6 +89,7 @@
 .a2b-btn[disabled] { opacity:0.45; cursor:default }
 .a2b-btn.go { background:#1fae4b } .a2b-btn.go:hover:not([disabled]) { background:#27c95a }
 .a2b-btn.bad { background:#c62828 }
+.a2b-btn.x { padding:4px 7px; background:rgba(229,57,53,0.35) } .a2b-btn.x:hover:not([disabled]) { background:#e53935 }
 .a2b-btn.wide { width:100%; padding:8px; font-weight:700; letter-spacing:0.5px }
 .a2b-pt { width:20px; height:20px; border-radius:10px; text-align:center; line-height:20px; font-weight:800; flex:none }
 .a2b-pt.a { background:#1fae4b } .a2b-pt.b { background:#e53935 }
@@ -120,7 +124,7 @@
       scope: true,
       link: function (scope) {
         scope.s = { view: {} }
-        scope.ui = { panel: false }
+        scope.ui = { panel: false, markers: true }
 
         if (!document.getElementById('a2brace-style')) {
           var st = document.createElement('style'); st.id = 'a2brace-style'; st.textContent = STYLE; document.head.appendChild(st)
@@ -170,7 +174,7 @@
             if (!Array.isArray(s.view.party.members)) s.view.party.members = Object.values(s.view.party.members || {})
             if (!Array.isArray(s.view.party.invited)) s.view.party.invited = Object.values(s.view.party.invited || {})
           }
-          scope.$evalAsync(function () { scope.s = s })
+          scope.$evalAsync(function () { scope.s = s; scope.ui.markers = s.showMarkers !== false })
         })
 
         scope.$on('$destroy', function () {
